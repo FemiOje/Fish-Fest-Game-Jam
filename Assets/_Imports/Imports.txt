@@ -1,3 +1,5 @@
 1. "Underwater Diving" by Ansimuz
-
 Asset Store: https://assetstore.unity.com/packages/2d/environments/underwater-diving-94029#content
+
+2. "Octopus, Jellyfish, Shark and Turtle Pixel Art" from itch.io
+Link: https://free-game-assets.itch.io/octopus-jellyfish-shark-and-turtle-free-sprite-pixel-art
