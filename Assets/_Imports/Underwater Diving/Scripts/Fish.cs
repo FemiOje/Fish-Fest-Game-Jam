@@ -2,14 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemy : MonoBehaviour {
+public class Fish : MonoBehaviour {
 
 	private PlayerController thePlayer;
 	public GameObject death;
 
 	public float speed = 0.3f;
 
-	private float turnTimer;
+	[SerializeField] private float turnTimer;
 	public float timeTrigger;
 
 	private Rigidbody2D myRigidbody;
@@ -37,15 +37,12 @@ public class Enemy : MonoBehaviour {
 			turnAround ();
 			turnTimer = 0;
 		}
-
-
-
 	}
 
 
 	void OnTriggerEnter2D(Collider2D other){
 
-		if(other.tag == "Player" && thePlayer.rushing){
+		if(other.tag == "Player"){
 			Instantiate (death, gameObject.transform.position, gameObject.transform.rotation);
 			Destroy (gameObject);
 		}

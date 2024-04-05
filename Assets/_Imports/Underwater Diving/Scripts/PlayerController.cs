@@ -6,96 +6,56 @@ using UnityEngine.SocialPlatforms.Impl;
 
 public class PlayerController : MonoBehaviour
 {
-    public float moveSpeed;
-    public bool rushing = false;
-    private float speedMod = 0;
-
-    float timeLeft = 2f;
-
+    [SerializeField]
+    float moveSpeed;
     private Rigidbody2D myRigidBody;
-
     private Animator myAnim;
-
     public GameObject bubbles;
+    private Vector2 playerMovementInput;
+	SpriteRenderer playerSpriteRenderer;
+	float horizontalInput;
+	float verticalInput;
 
-    // Use this for initialization
     void Start()
     {
         myRigidBody = GetComponent<Rigidbody2D>();
         myAnim = GetComponent<Animator>();
+		playerSpriteRenderer = GetComponent<SpriteRenderer>();
+
+		horizontalInput = 0;
+		verticalInput = 0;
     }
 
-    // Update is called once per frame
     void Update()
     {
-        resetBoostTime();
-        controllerManager();
-
-        myAnim.SetFloat("Speed", Mathf.Abs(myRigidBody.velocity.x));
-		Debug.Log(ScoreManager.Instance.Score);
+        HandleMovement();
+        HandleSpriteDirection();
     }
 
-    void controllerManager()
+    private void HandleMovement()
     {
-        if (Input.GetAxisRaw("Horizontal") > 0f)
-        {
-            transform.localScale = new Vector3(1f, 1f, 1f);
-            movePlayer();
-        }
-        else if (Input.GetAxisRaw("Horizontal") < 0f)
-        {
-            transform.localScale = new Vector3(-1f, 1f, 1f);
-            movePlayer();
-        }
-        else if (Input.GetAxisRaw("Vertical") > 0f)
-        {
-            myRigidBody.velocity = new Vector3(myRigidBody.velocity.x, moveSpeed, 0f);
-        }
-        else if (Input.GetAxis("Vertical") < 0f)
-        {
-            myRigidBody.velocity = new Vector3(myRigidBody.velocity.x, -moveSpeed, 0f);
-        }
-
-        if (Input.GetButtonDown("Jump") && !rushing)
-        {
-            rushing = true;
-            speedMod = 2;
-            Instantiate(bubbles, gameObject.transform.position, gameObject.transform.rotation);
-            movePlayer();
-        }
+        horizontalInput = Input.GetAxis("Horizontal");
+        verticalInput = Input.GetAxis("Vertical");
+        playerMovementInput = new Vector2(horizontalInput, verticalInput);
+        
+		myRigidBody.AddForce(playerMovementInput * moveSpeed * Time.deltaTime);
+        
+		myAnim.SetFloat("Speed", Mathf.Abs(myRigidBody.velocity.x));
     }
 
-    void movePlayer()
-    {
-        if (transform.localScale.x == 1)
+	private void HandleSpriteDirection(){
+		if (horizontalInput > 0f)
         {
-            myRigidBody.velocity = new Vector3(moveSpeed + speedMod, myRigidBody.velocity.y, 0f);
+			playerSpriteRenderer.flipX = false;
         }
-        else
+        else if (horizontalInput < 0f)
         {
-            myRigidBody.velocity = new Vector3(-(moveSpeed + speedMod), myRigidBody.velocity.y, 0f);
+			playerSpriteRenderer.flipX = true;
         }
-    }
-
-    void resetBoostTime()
-    {
-        if (timeLeft <= 0)
-        {
-            timeLeft = 2f;
-            rushing = false;
-            speedMod = 0;
-        }
-        else if (rushing)
-        {
-            timeLeft -= Time.deltaTime;
-        }
-    }
+	}
 
     public void hurt()
     {
-        if (!rushing)
-        {
-            gameObject.GetComponent<Animator>().Play("PlayerHurt");
-        }
+        gameObject.GetComponent<Animator>().Play("PlayerHurt");
     }
 }
