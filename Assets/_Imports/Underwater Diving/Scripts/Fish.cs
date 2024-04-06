@@ -2,58 +2,70 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Fish : MonoBehaviour {
+public class Fish : MonoBehaviour
+{
+    private PlayerController _player;
+    public GameObject death;
 
-	private PlayerController thePlayer;
-	public GameObject death;
+    public float speed = 0.3f;
 
-	public float speed = 0.3f;
+    [SerializeField]
+    private float turnTimer;
+    public float timeTrigger;
 
-	[SerializeField] private float turnTimer;
-	public float timeTrigger;
+    private Rigidbody2D _rigidbody;
+    private Animator _animator;
 
-	private Rigidbody2D myRigidbody;
+    void Start()
+    {
+        _player = FindObjectOfType<PlayerController>();
+        _rigidbody = GetComponent<Rigidbody2D>();
 
+        turnTimer = 0;
+        timeTrigger = 3f;
+    }
 
+    // Update is called once per frame
+    void Update()
+    {
+        _rigidbody.velocity = new Vector3(
+            _rigidbody.transform.localScale.x * speed,
+            _rigidbody.velocity.y,
+            0f
+        );
 
- 
+        turnTimer += Time.deltaTime;
+        if (turnTimer >= timeTrigger)
+        {
+            TurnAround();
+            turnTimer = 0;
+        }
+    }
 
-	// Use this for initialization
-	void Start () {
-		thePlayer = FindObjectOfType<PlayerController> ();	
-		myRigidbody = GetComponent<Rigidbody2D> ();
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.tag == "Player")
+        {
+            CollectFish();
+        }
+    }
 
-		turnTimer = 0;
-		timeTrigger = 3f;
-		 
-	}
+    void TurnAround()
+    {
+        if (transform.localScale.x == 1)
+        {
+            transform.localScale = new Vector3(-1f, 1f, 1f);
+        }
+        else
+        {
+            transform.localScale = new Vector3(1f, 1f, 1f);
+        }
+    }
 
-	// Update is called once per frame
-	void Update (){
-		myRigidbody.velocity = new Vector3 (myRigidbody.transform.localScale.x * speed, myRigidbody.velocity.y, 0f);
-
-		turnTimer += Time.deltaTime;
-		if(turnTimer >= timeTrigger){
-			turnAround ();
-			turnTimer = 0;
-		}
-	}
-
-
-	void OnTriggerEnter2D(Collider2D other){
-
-		if(other.tag == "Player"){
-			Instantiate (death, gameObject.transform.position, gameObject.transform.rotation);
-			Destroy (gameObject);
-		}
-
-	}
-
-	void turnAround(){
-		if (transform.localScale.x == 1) {
-			transform.localScale = new Vector3 (-1f, 1f, 1f);
-		} else {
-			transform.localScale = new Vector3 (1f,1f,1f);
-		}
-	}
+    public void CollectFish()
+    {
+        ScoreManager.Instance.UpdateScore(1);
+        Instantiate(death, gameObject.transform.position, gameObject.transform.rotation);
+        Destroy(gameObject);
+    }
 }

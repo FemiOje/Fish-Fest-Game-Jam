@@ -54,7 +54,7 @@ public class PlayerController : MonoBehaviour
         }
 	}
 
-    public void hurt()
+    public void Hurt()
     {
         gameObject.GetComponent<Animator>().Play("PlayerHurt");
     }

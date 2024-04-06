@@ -2,19 +2,22 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HurtPlayer : MonoBehaviour {
+public class HurtPlayer : MonoBehaviour
+{
+    private PlayerController _player;
 
-	private PlayerController thePlayer;
+    // Use this for initialization
+    void Start()
+    {
+        _player = FindObjectOfType<PlayerController>();
+    }
 
-	// Use this for initialization
-	void Start () {
-		thePlayer = FindObjectOfType<PlayerController> ();	
-	}
-
-	void OnTriggerEnter2D(Collider2D other){
-		if(other.tag == "Player"){
-			thePlayer.hurt ();	 
-		}
-
-	}
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.tag == "Player")
+        {
+            _player.Hurt();
+        }
+		ScoreManager.Instance.UpdateScore(-1);
+    }
 }

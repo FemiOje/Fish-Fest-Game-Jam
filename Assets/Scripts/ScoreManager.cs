@@ -1,10 +1,17 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 public class ScoreManager : MonoBehaviour
 {
     public static ScoreManager Instance;
+    public event Action OnIncreaseScore;
+
+    [SerializeField]
+    TextMeshProUGUI scoreText;
 
     private void Awake()
     {
@@ -17,13 +24,9 @@ public class ScoreManager : MonoBehaviour
 
     public int Score { get; private set; }
 
-
-    private void OnTriggerEnter2D(Collider2D other)
+    public void UpdateScore(int points)
     {
-        if (other.tag == "Fish")
-        {
-            Score++;
-            Destroy(other.gameObject);
-        }
+        Score += points;
+        scoreText.text = "Score: " + Score;
     }
 }

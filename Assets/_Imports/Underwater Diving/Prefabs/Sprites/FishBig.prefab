@@ -144,7 +144,7 @@ Animator:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1788738869386804}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: c5e2c131d878a4ec997a0ce0d3d9ccc6, type: 2}
   m_CullingMode: 0
@@ -171,6 +171,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   death: {fileID: 1820545851295154, guid: b22a24e39bda14f3bb2b1feb1d07ee14, type: 3}
   speed: 0.3
+  turnTimer: 0
   timeTrigger: 0
 --- !u!50 &50066830953986102
 Rigidbody2D:

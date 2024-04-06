@@ -131,7 +131,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1849596494334278}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 609dc6b73a5ce4b1bb5bf085838b2318, type: 3}
   m_Name: 
@@ -150,6 +150,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   death: {fileID: 1820545851295154, guid: b22a24e39bda14f3bb2b1feb1d07ee14, type: 3}
   speed: 0.3
+  turnTimer: 0
   timeTrigger: 0
 --- !u!50 &50051937484235604
 Rigidbody2D:
