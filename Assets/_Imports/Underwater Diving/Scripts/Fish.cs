@@ -6,23 +6,32 @@ public class Fish : MonoBehaviour
 {
     private PlayerController _player;
     public GameObject death;
-
     public float speed = 0.3f;
 
     [SerializeField]
-    private float turnTimer;
-    public float timeTrigger;
+    float turnTimer;
 
+    [SerializeField]
+    float timeTrigger;
     private Rigidbody2D _rigidbody;
     private Animator _animator;
+    private int _points;
+
+    public enum TypeOfFish
+    {
+        Domestic,
+        Wild
+    }
+
+    public TypeOfFish typeOfFish;
 
     void Start()
     {
         _player = FindObjectOfType<PlayerController>();
         _rigidbody = GetComponent<Rigidbody2D>();
+        _animator = GetComponent<Animator>();
 
-        turnTimer = 0;
-        timeTrigger = 3f;
+        CalculatePoints(typeOfFish);
     }
 
     // Update is called once per frame
@@ -50,6 +59,23 @@ public class Fish : MonoBehaviour
         }
     }
 
+
+    public void CalculatePoints(TypeOfFish typeOfFish)
+    {
+        switch (typeOfFish)
+        {
+            case TypeOfFish.Domestic:
+                _points = 1;
+                break;
+            case TypeOfFish.Wild:
+                _points = -1;
+                break;
+            default:
+                Debug.LogWarning("Set typeOfFish to domestic or wild");
+                break;
+        }
+    }
+
     void TurnAround()
     {
         if (transform.localScale.x == 1)
@@ -64,7 +90,8 @@ public class Fish : MonoBehaviour
 
     public void CollectFish()
     {
-        ScoreManager.Instance.UpdateScore(1);
+        Debug.Log("CollectFish() runs");
+        GameManager.Instance.UpdateScore(_points);
         Instantiate(death, gameObject.transform.position, gameObject.transform.rotation);
         Destroy(gameObject);
     }

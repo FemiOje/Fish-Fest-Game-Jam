@@ -6,10 +6,13 @@ public class HurtPlayer : MonoBehaviour
 {
     private PlayerController _player;
 
-    // Use this for initialization
     void Start()
     {
         _player = FindObjectOfType<PlayerController>();
+        if (_player == null)
+        {
+            Debug.Log("PlayerController script does not exist in the scene.");
+        }
     }
 
     void OnTriggerEnter2D(Collider2D other)
@@ -18,6 +21,6 @@ public class HurtPlayer : MonoBehaviour
         {
             _player.Hurt();
         }
-		ScoreManager.Instance.UpdateScore(-1);
+        GameManager.Instance.UpdateScore(-1);
     }
 }
