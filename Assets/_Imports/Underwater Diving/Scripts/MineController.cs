@@ -20,7 +20,7 @@ public class MineController : MonoBehaviour {
 
 	void OnTriggerEnter2D(Collider2D other){
 		if(other.tag == "Player"){	
-			
+			GameManager.Instance.UpdateLives(-1);
 			Destroy (gameObject);
 			Instantiate (explosion, gameObject.transform.position, gameObject.transform.rotation);
 		}	
