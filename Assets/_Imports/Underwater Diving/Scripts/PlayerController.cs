@@ -10,6 +10,10 @@ public class PlayerController : MonoBehaviour
     float moveSpeed;
     private Rigidbody2D myRigidBody;
     private Animator myAnim;
+    
+    AudioSource _audioSource;
+    [SerializeField] AudioClip _hurtClip1;
+    [SerializeField] AudioClip _hurtClip2;
     public GameObject bubbles;
     private Vector2 playerMovementInput;
 	SpriteRenderer playerSpriteRenderer;
@@ -21,6 +25,7 @@ public class PlayerController : MonoBehaviour
         myRigidBody = GetComponent<Rigidbody2D>();
         myAnim = GetComponent<Animator>();
 		playerSpriteRenderer = GetComponent<SpriteRenderer>();
+        _audioSource = GetComponent<AudioSource>();
 
 		horizontalInput = 0;
 		verticalInput = 0;
@@ -56,6 +61,8 @@ public class PlayerController : MonoBehaviour
 
     public void Hurt()
     {
-        gameObject.GetComponent<Animator>().Play("PlayerHurt");
+        myAnim.Play("PlayerHurt");
+        _audioSource.PlayOneShot(_hurtClip1);
+        _audioSource.PlayOneShot(_hurtClip2);
     }
 }
