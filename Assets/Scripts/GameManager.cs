@@ -71,7 +71,7 @@ public class GameManager : MonoBehaviour
     public void HandleGameOver()
     {
         Time.timeScale = 0;
-        onGameOver?.Invoke();
+        // _gameOverSound.Play();
     }
 
     public void QuitGame()
@@ -81,13 +81,13 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        if (Lives <= 0)
-        {
-            HandleGameOver();
-        }
         if (Score < 0)
         {
             Score = 0;
+        }
+        if (Lives <= 0)
+        {
+            HandleGameOver();
         }
     }
 }

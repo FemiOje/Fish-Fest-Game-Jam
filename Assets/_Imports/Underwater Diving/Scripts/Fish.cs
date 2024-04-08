@@ -8,14 +8,13 @@ public class Fish : MonoBehaviour
     public GameObject death;
     public float speed = 0.3f;
 
-    [SerializeField]
-    float turnTimer;
+    [SerializeField] float turnTimer;
 
-    [SerializeField]
-    float timeTrigger;
+    [SerializeField] float timeTrigger;
     private Rigidbody2D _rigidbody;
-    private Animator _animator;
+    private AudioSource _audioSource;
     private int _points;
+    [SerializeField] AudioClip _collectFishSound;
 
     public enum TypeOfFish
     {
@@ -29,7 +28,7 @@ public class Fish : MonoBehaviour
     {
         _player = FindObjectOfType<PlayerController>();
         _rigidbody = GetComponent<Rigidbody2D>();
-        _animator = GetComponent<Animator>();
+        _audioSource = GetComponent<AudioSource>();
 
         CalculatePoints(typeOfFish);
     }
@@ -90,6 +89,7 @@ public class Fish : MonoBehaviour
 
     public void CollectFish()
     {
+        _audioSource.PlayOneShot(_collectFishSound);
         GameManager.Instance.UpdateScore(_points);
         Instantiate(death, gameObject.transform.position, gameObject.transform.rotation);
         Destroy(gameObject);
