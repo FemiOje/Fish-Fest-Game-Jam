@@ -6,8 +6,6 @@ using UnityEngine.SceneManagement;
 public class TitleScreen : MonoBehaviour {
 
 	public float count;
-	private float currentPos;
-
 	private int titleState;
 
 	public GameObject instructionsWindow;
@@ -21,17 +19,9 @@ public class TitleScreen : MonoBehaviour {
 	void Update () {
 		transform.position = new Vector3 (transform.position.x + count, transform.position.y, -10);	
 
-
-		if(Input.GetKeyDown(KeyCode.Return)){
-
-			if (titleState == 1) {
-				instructionsWindow.SetActive (true);
-				titleState = 2;
-
-			} else {
-				SceneManager.LoadScene ("scene-1");
-			}
-
+		if(Input.GetKeyDown(KeyCode.Return))
+		{
+			SceneManager.LoadScene ("scene-1");
 		}
 
 	}

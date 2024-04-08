@@ -152,7 +152,7 @@ MonoBehaviour:
   speed: 0.7
   turnTimer: 5
   timeTrigger: 3
-  typeOfFish: 1
+  typeOfFish: 0
 --- !u!58 &5851583651741164519
 CircleCollider2D:
   m_ObjectHideFlags: 0

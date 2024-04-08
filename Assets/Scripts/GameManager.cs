@@ -9,8 +9,14 @@ public class GameManager : MonoBehaviour
     public int Score { get; private set; }
     public int Lives { get; private set; }
 
-    [SerializeField] TextMeshProUGUI scoreText;
-    [SerializeField] TextMeshProUGUI livesText;
+    [SerializeField]
+    TextMeshProUGUI scoreText;
+
+    [SerializeField]
+    TextMeshProUGUI livesText;
+
+    private int _defaultScore = 0;
+    private int _defaultLives = 5;
 
     private void Awake()
     {
@@ -25,9 +31,10 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    private void Start() {
-        Lives = 5;
-        Score = 0;
+    private void Start()
+    {
+        Lives = _defaultLives;
+        Score = _defaultScore;
     }
 
     public void UpdateScore(int points)
@@ -42,13 +49,32 @@ public class GameManager : MonoBehaviour
         livesText.text = "Lives: " + Lives;
     }
 
+    public void HandleGameOver()
+    {
+        Time.timeScale = 0;
+        UIManager.Instance.ShowGameOverPanel();
+    }
+
+    public void PauseGame()
+    {
+        Time.timeScale = 0;
+        UIManager.Instance.ShowPausePanel();
+    }
+
+    public void ResumeGame()
+    {
+        Time.timeScale = 1;
+        UIManager.Instance.HidePausePanel();
+    }
+
     private void Update()
     {
-        if (Lives <= 0)
+        if (Lives <= 0) { 
+            HandleGameOver();
+        }
+        if (Score < 0)
         {
-            //game over sequence
-            Debug.Log("Game over");
-            Time.timeScale = 0;
+            Score = 0;
         }
     }
 }
