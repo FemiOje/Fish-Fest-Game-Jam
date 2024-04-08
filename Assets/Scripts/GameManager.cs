@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
@@ -17,6 +15,17 @@ public class GameManager : MonoBehaviour
 
     private int _defaultScore = 0;
     private int _defaultLives = 5;
+
+    // Define delegates and events for UI actions
+    public delegate void OnPauseGame();
+    public static event OnPauseGame onPauseGame;
+
+    public delegate void OnResumeGame();
+    public static event OnResumeGame onResumeGame;
+
+    
+    public delegate void OnGameOver();
+    public static event OnGameOver onGameOver;
 
     private void Awake()
     {
@@ -40,36 +49,40 @@ public class GameManager : MonoBehaviour
     public void UpdateScore(int points)
     {
         Score += points;
-        scoreText.text = "Score: " + Score;
+        scoreText.text = Score.ToString();
     }
 
     public void UpdateLives(int points)
     {
         Lives += points;
-        livesText.text = "Lives: " + Lives;
+        livesText.text = Lives.ToString();
+    }
+
+    public void PauseGame()
+    {
+        Time.timeScale = 0f;
+    }
+
+    public void ResumeGame()
+    {
+        Time.timeScale = 1f;
     }
 
     public void HandleGameOver()
     {
         Time.timeScale = 0;
-        UIManager.Instance.ShowGameOverPanel();
+        onGameOver?.Invoke();
     }
 
-    public void PauseGame()
+    public void QuitGame()
     {
-        Time.timeScale = 0;
-        UIManager.Instance.ShowPausePanel();
-    }
-
-    public void ResumeGame()
-    {
-        Time.timeScale = 1;
-        UIManager.Instance.HidePausePanel();
+        Application.Quit();
     }
 
     private void Update()
     {
-        if (Lives <= 0) { 
+        if (Lives <= 0)
+        {
             HandleGameOver();
         }
         if (Score < 0)

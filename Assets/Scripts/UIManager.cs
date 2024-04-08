@@ -7,29 +7,11 @@ public class UIManager : MonoBehaviour
 {
     public TextMeshProUGUI scoreText;
     public TextMeshProUGUI livesText;
-    public Button startButton;
+    public Button resumeButton;
     public Button pauseButton;
     public GameObject gameOverPanel;
     public GameObject pausePanel;
-
-    private static UIManager _instance;
-
-    public static UIManager Instance
-    {
-        get
-        {
-            if (_instance == null)
-            {
-                _instance = FindObjectOfType<UIManager>();
-                if (_instance == null)
-                {
-                    GameObject uiManagerObject = new GameObject("UIManager");
-                    _instance = uiManagerObject.AddComponent<UIManager>();
-                }
-            }
-            return _instance;
-        }
-    }
+    public static UIManager Instance;
 
 
     public void ShowGameOverPanel()
@@ -42,30 +24,49 @@ public class UIManager : MonoBehaviour
         gameOverPanel.SetActive(false);
     }
 
-    public void ShowPausePanel(){
+    public void ShowPausePanel()
+    {
         pausePanel.SetActive(true);
     }
 
-    public void HidePausePanel(){
+    public void HidePausePanel()
+    {
         pausePanel.SetActive(false);
     }
 
-    public void StartGame(){
-        SceneManager.LoadScene("scene-1", LoadSceneMode.Single);
+    public void ResumeGame(){
+        Time.timeScale = 1f;
+        HidePausePanel();
     }
 
 
     // Awake method to ensure singleton pattern
-    private void Awake()
+     private void Awake()
     {
-        if (_instance == null)
+        if (Instance == null)
         {
-            _instance = this;
-            DontDestroyOnLoad(gameObject);
+            Instance = this;
+            // DontDestroyOnLoad(gameObject);
         }
         else
         {
-            Destroy(gameObject);
+            // Destroy(gameObject);
         }
+    }
+
+     private void OnEnable()
+    {
+        // Subscribe to GameManager events
+        GameManager.onPauseGame += ShowPausePanel;
+        GameManager.onResumeGame += HidePausePanel;
+        GameManager.onGameOver += ShowGameOverPanel;
+    }
+
+    private void OnDisable()
+    {
+        // Unsubscribe from GameManager events
+        GameManager.onPauseGame -= ShowPausePanel;
+        GameManager.onResumeGame -= HidePausePanel;
+        GameManager.onGameOver -= ShowGameOverPanel;
     }
 }

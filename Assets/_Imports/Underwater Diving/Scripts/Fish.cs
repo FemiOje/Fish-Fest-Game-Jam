@@ -90,7 +90,6 @@ public class Fish : MonoBehaviour
 
     public void CollectFish()
     {
-        Debug.Log("CollectFish() runs");
         GameManager.Instance.UpdateScore(_points);
         Instantiate(death, gameObject.transform.position, gameObject.transform.rotation);
         Destroy(gameObject);
