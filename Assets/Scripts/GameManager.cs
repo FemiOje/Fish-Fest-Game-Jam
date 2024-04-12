@@ -23,7 +23,6 @@ public class GameManager : MonoBehaviour
     public delegate void OnResumeGame();
     public static event OnResumeGame onResumeGame;
 
-    
     public delegate void OnGameOver();
     public static event OnGameOver onGameOver;
 
@@ -44,10 +43,17 @@ public class GameManager : MonoBehaviour
     {
         Lives = _defaultLives;
         Score = _defaultScore;
+        scoreText.text = Score.ToString();
     }
 
     public void UpdateScore(int points)
     {
+        if (Score < 0)
+        {
+            Score = 0;
+            scoreText.text = Score.ToString();
+            return;
+        }
         Score += points;
         scoreText.text = Score.ToString();
     }
@@ -81,10 +87,6 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        if (Score < 0)
-        {
-            Score = 0;
-        }
         if (Lives <= 0)
         {
             HandleGameOver();

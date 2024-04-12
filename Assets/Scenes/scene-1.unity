@@ -1425,15 +1425,15 @@ RectTransform:
   m_GameObject: {fileID: 890422019}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.55213, y: 0.55213, z: 0.55213}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1652207839}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0.000030517578}
-  m_SizeDelta: {x: -600, y: -453.06906}
+  m_SizeDelta: {x: 200, y: -77.06906}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &890422021
 MonoBehaviour:
@@ -1455,35 +1455,14 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: '1. "Underwater Diving" by Ansimuz
-
-    Asset Store: https://assetstore.unity.com/packages/2d/environments/underwater-diving-94029#content
-
-
-
-    2.
-    "Octopus, Jellyfish, Shark and Turtle Pixel Art" from itch.io
-
-    Link: https://free-game-assets.itch.io/octopus-jellyfish-shark-and-turtle-free-sprite-pixel-art
-
-
-
-    3.
-    Sound:
-
-    mab-water-pzm-sass.wav from https://freesound.org/people/mab/sounds/23295/
-
-
-
-    4.
-    UI Click Sound Pack: https://assetstore.unity.com/packages/audio/sound-fx/free-ui-click-sound-pack-244644
-
-    https://www.kenney.nl/
-
-
-
-    5.
-    RPG Essentials Sound Effects: https://assetstore.unity.com/packages/audio/sound-fx/rpg-essentials-sound-effects-free-227708'
+  m_text: "1. \"Underwater Diving\" by Ansimuz\r\nAsset Store: https://assetstore.unity.com/packages/2d/environments/underwater-diving-94029#content\r\n\r\n2.
+    \"Octopus, Jellyfish, Shark and Turtle Pixel Art\" from itch.io\r\nLink: https://free-game-assets.itch.io/octopus-jellyfish-shark-and-turtle-free-sprite-pixel-art\r\n\r\n3.
+    Sound:\r\nmab-water-pzm-sass.wav from https://freesound.org/people/mab/sounds/23295/\r\n\r\n4.
+    UI Click Sound Pack: https://assetstore.unity.com/packages/audio/sound-fx/free-ui-click-sound-pack-244644\r\nhttps://www.kenney.nl/\r\n\r\n5.
+    RPG Essentials Sound Effects: https://assetstore.unity.com/packages/audio/sound-fx/rpg-essentials-sound-effects-free-227708\r\n\r\n6.
+    Water Game Theme Loop 2.wav from https://freesound.org/people/Mrthenoronha/sounds/514800/\r\n\r\n7.
+    Intro Music: Electro Ambient Music: Suspension \u2013 Pulsating and Futuristic
+    by https://freesound.org/people/kjartan_abel/sounds/531854/"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 76e9500b458fe8a439823c7a862befd1, type: 2}
   m_sharedMaterial: {fileID: -6720639948567065891, guid: 76e9500b458fe8a439823c7a862befd1, type: 2}
@@ -1510,8 +1489,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 17.59
-  m_fontSizeBase: 17.59
+  m_fontSize: 20
+  m_fontSizeBase: 20
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -1546,7 +1525,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: -301.79773, y: -226.34836, z: -297.60587, w: -226.34828}
+  m_margin: {x: -577.0433, y: -272.22247, z: -510.46234, w: -349.29123}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -3775,6 +3754,14 @@ PrefabInstance:
       propertyPath: _hurtClip2
       value: 
       objectReference: {fileID: 8300000, guid: 1f501ce41f593154396c6e647e156219, type: 3}
+    - target: {fileID: 9007093768107183305, guid: e99e576c12ce90046be5faf0749bd748, type: 3}
+      propertyPath: _collectWildFishClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 1ed8fb76fc64e4e46847348138782234, type: 3}
+    - target: {fileID: 9007093768107183305, guid: e99e576c12ce90046be5faf0749bd748, type: 3}
+      propertyPath: _collectDomesticFishClip
+      value: 
+      objectReference: {fileID: 8300000, guid: c5cb2ac29e89dbf43a9b644caaad45e6, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

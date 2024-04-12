@@ -6,27 +6,30 @@ using UnityEngine.UIElements;
 
 public class SpawnManager : MonoBehaviour
 {
-    [SerializeField] GameObject[] fishPrefabs;
-    [SerializeField] BoxCollider2D boundaryCollider;
+    [SerializeField]
+    GameObject[] fishPrefabs;
+
+    [SerializeField]
+    BoxCollider2D boundaryCollider;
     private int _numberOfObjects = 10;
     private int _maxAttempts = 10;
 
     void Start()
     {
-        InstantiateObjects();
+        InstantiateNewFishObjects();
+        InvokeRepeating(nameof(CheckNumOfFish), 5, 3);
     }
 
-    void InstantiateObjects()
+    void InstantiateNewFishObjects()
     {
         List<Vector2> validPositions = new List<Vector2>();
-
 
         for (int i = 0; i < _numberOfObjects; i++)
         {
             Vector2 randomPosition = GenerateRandomPosition();
             validPositions.Add(randomPosition);
         }
-        
+
         foreach (Vector2 position in validPositions)
         {
             int randomIndex = UnityEngine.Random.Range(0, fishPrefabs.Length);
@@ -42,8 +45,14 @@ public class SpawnManager : MonoBehaviour
         while (attempts < _maxAttempts)
         {
             randomPoint = new Vector2(
-                UnityEngine.Random.Range(boundaryCollider.bounds.min.x, boundaryCollider.bounds.max.x),
-                UnityEngine.Random.Range(boundaryCollider.bounds.min.y, boundaryCollider.bounds.max.y)
+                UnityEngine.Random.Range(
+                    boundaryCollider.bounds.min.x,
+                    boundaryCollider.bounds.max.x
+                ),
+                UnityEngine.Random.Range(
+                    boundaryCollider.bounds.min.y,
+                    boundaryCollider.bounds.max.y
+                )
             );
 
             if (IsPointWithinBoundary(randomPoint))
@@ -54,13 +63,38 @@ public class SpawnManager : MonoBehaviour
             attempts++;
         }
 
-        Debug.LogWarning("Failed to find a valid position within the boundary after " + _maxAttempts + " attempts.");
+        Debug.LogWarning(
+            "Failed to find a valid position within the boundary after "
+                + _maxAttempts
+                + " attempts."
+        );
         return randomPoint;
     }
 
     bool IsPointWithinBoundary(Vector2 point)
     {
-        // Check if the point is within the boundary
         return boundaryCollider.OverlapPoint(point);
+    }
+
+    private void CheckNumOfFish()
+    {
+        Fish[] allFishInScene = Fish.FindObjectsOfType<Fish>();
+
+        int numberOfDomesticFish = 0;
+
+        for (int i = 0; i < allFishInScene.Length; i++)
+        {
+            if (allFishInScene[i].typeOfFish == Fish.TypeOfFish.Domestic)
+            {
+                numberOfDomesticFish++;
+            }
+        }
+        if (numberOfDomesticFish <= 5)
+        {
+            InstantiateNewFishObjects();
+        }
+
+        Debug.Log("Number of fish found: " + allFishInScene.Length);
+        Debug.Log("Number of domestic fish found: " + numberOfDomesticFish);
     }
 }
