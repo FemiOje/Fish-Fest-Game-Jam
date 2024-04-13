@@ -1,37 +1,32 @@
 using UnityEngine;
 using TMPro;
+using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
+    AudioSource _audioSource;
     public int Score { get; private set; }
     public int Lives { get; private set; }
-
-    [SerializeField]
-    TextMeshProUGUI scoreText;
-
-    [SerializeField]
-    TextMeshProUGUI livesText;
-
     private int _defaultScore = 0;
     private int _defaultLives = 5;
-
-    // Define delegates and events for UI actions
-    public delegate void OnPauseGame();
-    public static event OnPauseGame onPauseGame;
-
-    public delegate void OnResumeGame();
-    public static event OnResumeGame onResumeGame;
-
-    public delegate void OnGameOver();
-    public static event OnGameOver onGameOver;
+    
+    
+    [Header("Text")]
+    [SerializeField] TextMeshProUGUI livesText;
+    [SerializeField] TextMeshProUGUI scoreText;
+    
+    
+    [Header("Audio")]
+    [SerializeField] AudioSource gameMusic;
+    [SerializeField] AudioClip gameOverAudioClip;
 
     private void Awake()
     {
         if (Instance == null)
         {
             Instance = this;
-            DontDestroyOnLoad(gameObject);
         }
         else
         {
@@ -41,9 +36,34 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+        _audioSource = GetComponent<AudioSource>();
+        InitializeLevel();
+    }
+
+    private void Update()
+    {
+        if (Lives <= 0)
+        {
+            HandleGameOver();
+        }
+    }
+
+
+
+
+
+    private void InitializeLevel()
+    {
         Lives = _defaultLives;
         Score = _defaultScore;
         scoreText.text = Score.ToString();
+        Time.timeScale = 1f;
+    }
+  
+    public void UpdateLives(int points)
+    {
+        Lives += points;
+        livesText.text = Lives.ToString();
     }
 
     public void UpdateScore(int points)
@@ -58,11 +78,6 @@ public class GameManager : MonoBehaviour
         scoreText.text = Score.ToString();
     }
 
-    public void UpdateLives(int points)
-    {
-        Lives += points;
-        livesText.text = Lives.ToString();
-    }
 
     public void PauseGame()
     {
@@ -76,20 +91,36 @@ public class GameManager : MonoBehaviour
 
     public void HandleGameOver()
     {
-        Time.timeScale = 0;
-        // _gameOverSound.Play();
+        if (gameMusic != null)
+        {
+            gameMusic.Stop();
+        }
+        
+        if (_audioSource != null)
+        {
+            _audioSource.PlayOneShot(gameOverAudioClip);
+        }
+
+        // Gradually activate the game over screen
+        StartCoroutine(UIManager.Instance.FadeInGameOverPanel());
     }
 
+    public void RestartLevel()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
+    public void LoadMainMenu()
+    {
+        SceneManager.LoadScene(0);
+    }
+    
     public void QuitGame()
     {
         Application.Quit();
     }
 
-    private void Update()
-    {
-        if (Lives <= 0)
-        {
-            HandleGameOver();
-        }
+    private void OnDisable() {
+        UIManager.Instance.HideGameOverPanel();
     }
 }

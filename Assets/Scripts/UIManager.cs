@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using UnityEngine.SceneManagement;
+using System.Collections;
 
 public class UIManager : MonoBehaviour
 {
@@ -12,11 +13,32 @@ public class UIManager : MonoBehaviour
     public GameObject gameOverPanel;
     public GameObject pausePanel;
     public static UIManager Instance;
+    private float gameOverFadeDuration = 0.5f;
 
+    private void Start() {
+        Time.timeScale = 1f;       
+    }
 
-    public void ShowGameOverPanel()
+    public IEnumerator FadeInGameOverPanel()
     {
+        // // Get the initial alpha value of the game over panel
+        // CanvasGroup canvasGroup = gameOverPanel.GetComponent<CanvasGroup>();
+        // float alpha = canvasGroup.alpha;
+
+        // // Gradually increase the alpha value to fade in the panel
+        // float elapsedTime = 0f;
+        // while (elapsedTime < gameOverFadeDuration)
+        // {
+        //     elapsedTime += Time.deltaTime;
+        //     canvasGroup.alpha = Mathf.Lerp(alpha, 1f, elapsedTime / gameOverFadeDuration);
+        //     yield return null;
+        // }
+
+        // // Ensure the alpha value is set to 1 after fading
+        // canvasGroup.alpha = 1f;
+        yield return new WaitForSeconds(gameOverFadeDuration);
         gameOverPanel.SetActive(true);
+        Time.timeScale = 0f;
     }
 
     public void HideGameOverPanel()
@@ -24,49 +46,17 @@ public class UIManager : MonoBehaviour
         gameOverPanel.SetActive(false);
     }
 
-    public void ShowPausePanel()
-    {
-        pausePanel.SetActive(true);
-    }
-
-    public void HidePausePanel()
-    {
-        pausePanel.SetActive(false);
-    }
-
-    public void ResumeGame(){
-        Time.timeScale = 1f;
-        HidePausePanel();
-    }
-
-
-    // Awake method to ensure singleton pattern
-     private void Awake()
+  
+    private void Awake()
     {
         if (Instance == null)
         {
             Instance = this;
-            // DontDestroyOnLoad(gameObject);
+            DontDestroyOnLoad(gameObject);
         }
         else
         {
-            // Destroy(gameObject);
+            Destroy(gameObject);
         }
-    }
-
-     private void OnEnable()
-    {
-        // Subscribe to GameManager events
-        GameManager.onPauseGame += ShowPausePanel;
-        GameManager.onResumeGame += HidePausePanel;
-        GameManager.onGameOver += ShowGameOverPanel;
-    }
-
-    private void OnDisable()
-    {
-        // Unsubscribe from GameManager events
-        GameManager.onPauseGame -= ShowPausePanel;
-        GameManager.onResumeGame -= HidePausePanel;
-        GameManager.onGameOver -= ShowGameOverPanel;
     }
 }

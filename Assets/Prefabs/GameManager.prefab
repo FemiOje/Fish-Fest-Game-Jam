@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 1071338830525752339}
   - component: {fileID: 398701671474679414}
   - component: {fileID: 3781913421842863576}
-  - component: {fileID: 450242143727879063}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -69,21 +68,3 @@ MonoBehaviour:
   - {fileID: 6733678908363875716, guid: 2735ca063c4822948ad8a54b9e32b39d, type: 3}
   - {fileID: 7114461451984971449, guid: f80b2aa96a444004fb9e12fc089f3091, type: 3}
   boundaryCollider: {fileID: 0}
---- !u!114 &450242143727879063
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2831398137862945570}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bc3c81c8fe22bab4096e0f24b335e3df, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  scoreText: {fileID: 0}
-  livesText: {fileID: 0}
-  startButton: {fileID: 0}
-  pauseButton: {fileID: 0}
-  gameOverPanel: {fileID: 0}
-  pausePanel: {fileID: 0}
