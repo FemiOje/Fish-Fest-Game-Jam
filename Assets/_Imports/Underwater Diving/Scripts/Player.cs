@@ -4,7 +4,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SocialPlatforms.Impl;
 
-public class PlayerController : MonoBehaviour
+public class Player : MonoBehaviour
 {
     [SerializeField]
     float moveSpeed;
@@ -13,13 +13,17 @@ public class PlayerController : MonoBehaviour
 
     AudioSource _audioSource;
 
-    [SerializeField] AudioClip _hurtClip1;
+    [SerializeField]
+    AudioClip _hurtClip1;
 
-    [SerializeField] AudioClip _hurtClip2;
+    [SerializeField]
+    AudioClip _hurtClip2;
 
-    [SerializeField] AudioClip _collectDomesticFishClip;
+    [SerializeField]
+    AudioClip _collectDomesticFishClip;
 
-    [SerializeField] AudioClip _collectWildFishClip;
+    [SerializeField]
+    AudioClip _collectWildFishClip;
     public GameObject bubbles;
     private Vector2 _movementInput;
     SpriteRenderer _spriteRenderer;
@@ -75,19 +79,20 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.CompareTag("Fish"))
-        {
-            Fish fish = other.gameObject.GetComponent<Fish>();
+        // REFACTOR: LET ONLY ONE SCRIPT HANDLE THE COLLISION AND SCORE UPDATE,
+        // PREFERRABLY A ScoreManager.cs SCRIPT
 
+        // REFACTOR: Use an event handler which calls the method(s) to play the sound and update the score
+        Fish fish = other?.gameObject.GetComponent<Fish>();
+
+        if (fish != null)
+        {
             if (fish.typeOfFish == Fish.TypeOfFish.Domestic)
             {
-                Debug.Log("Collided with domestic fish");
                 _audioSource.PlayOneShot(_collectDomesticFishClip);
             }
-            
-            if (fish.typeOfFish == Fish.TypeOfFish.Wild)
+            else if (fish.typeOfFish == Fish.TypeOfFish.Wild)
             {
-                Debug.Log("Collided with wild fish");
                 _audioSource.PlayOneShot(_collectWildFishClip);
             }
         }

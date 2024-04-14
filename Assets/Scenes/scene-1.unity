@@ -4784,6 +4784,18 @@ PrefabInstance:
       propertyPath: boundaryCollider
       value: 
       objectReference: {fileID: 591428042}
+    - target: {fileID: 3781913421842863576, guid: 9951875b24e7dc748a1d554c5c30757c, type: 3}
+      propertyPath: fishPrefabs.Array.size
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 3781913421842863576, guid: 9951875b24e7dc748a1d554c5c30757c, type: 3}
+      propertyPath: fishPrefabs.Array.data[7]
+      value: 
+      objectReference: {fileID: 7604684460519563564, guid: 5361c586688b06f4db5be2cf335b69c5, type: 3}
+    - target: {fileID: 3781913421842863576, guid: 9951875b24e7dc748a1d554c5c30757c, type: 3}
+      propertyPath: fishPrefabs.Array.data[8]
+      value: 
+      objectReference: {fileID: 3338582056222517832, guid: 6b64daf47257cf249bda24bbada9b643, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

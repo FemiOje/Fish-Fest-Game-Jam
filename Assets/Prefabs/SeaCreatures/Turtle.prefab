@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 8855425826605822674}
   m_Layer: 0
   m_Name: Turtle
-  m_TagString: Untagged
+  m_TagString: Fish
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -152,7 +152,6 @@ MonoBehaviour:
   speed: 0.3
   turnTimer: 5
   timeTrigger: 3
-  _collectFishSound: {fileID: 8300000, guid: ba39bf8baf6d13046889b2d64822381a, type: 3}
   typeOfFish: 0
 --- !u!58 &8855425826605822674
 CircleCollider2D:

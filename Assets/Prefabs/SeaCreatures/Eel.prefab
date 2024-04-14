@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 5851583651741164519}
   m_Layer: 0
   m_Name: Eel
-  m_TagString: Untagged
+  m_TagString: Fish
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -152,7 +152,6 @@ MonoBehaviour:
   speed: 0.7
   turnTimer: 5
   timeTrigger: 3
-  _collectFishSound: {fileID: 8300000, guid: 5c7b6d4002009e842bd2621585546d19, type: 3}
   typeOfFish: 0
 --- !u!58 &5851583651741164519
 CircleCollider2D:
