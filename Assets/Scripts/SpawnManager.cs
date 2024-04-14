@@ -93,8 +93,5 @@ public class SpawnManager : MonoBehaviour
         {
             InstantiateNewFishObjects();
         }
-
-        Debug.Log("Number of fish found: " + allFishInScene.Length);
-        Debug.Log("Number of domestic fish found: " + numberOfDomesticFish);
     }
 }

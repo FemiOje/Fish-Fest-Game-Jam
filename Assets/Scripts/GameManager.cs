@@ -68,16 +68,12 @@ public class GameManager : MonoBehaviour
 
     public void UpdateScore(int points)
     {
-        if (Score < 0)
-        {
-            Score = 0;
-            scoreText.text = Score.ToString();
-            return;
-        }
         Score += points;
+
+        // Ensure Score doesn't become negative
+        Score = Mathf.Max(Score, 0);
         scoreText.text = Score.ToString();
     }
-
 
     public void PauseGame()
     {
@@ -101,7 +97,6 @@ public class GameManager : MonoBehaviour
             _audioSource.PlayOneShot(gameOverAudioClip);
         }
 
-        // Gradually activate the game over screen
         StartCoroutine(UIManager.Instance.FadeInGameOverPanel());
     }
 

@@ -8,33 +8,29 @@ public class PlayerController : MonoBehaviour
 {
     [SerializeField]
     float moveSpeed;
-    private Rigidbody2D myRigidBody;
-    private Animator myAnim;
+    private Rigidbody2D _rigidBody;
+    private Animator _animator;
 
     AudioSource _audioSource;
 
-    [SerializeField]
-    AudioClip _hurtClip1;
+    [SerializeField] AudioClip _hurtClip1;
 
-    [SerializeField]
-    AudioClip _hurtClip2;
+    [SerializeField] AudioClip _hurtClip2;
 
-    [SerializeField]
-    AudioClip _collectDomesticFishClip;
+    [SerializeField] AudioClip _collectDomesticFishClip;
 
-    [SerializeField]
-    AudioClip _collectWildFishClip;
+    [SerializeField] AudioClip _collectWildFishClip;
     public GameObject bubbles;
-    private Vector2 playerMovementInput;
-    SpriteRenderer playerSpriteRenderer;
+    private Vector2 _movementInput;
+    SpriteRenderer _spriteRenderer;
     float horizontalInput;
     float verticalInput;
 
     void Start()
     {
-        myRigidBody = GetComponent<Rigidbody2D>();
-        myAnim = GetComponent<Animator>();
-        playerSpriteRenderer = GetComponent<SpriteRenderer>();
+        _rigidBody = GetComponent<Rigidbody2D>();
+        _animator = GetComponent<Animator>();
+        _spriteRenderer = GetComponent<SpriteRenderer>();
         _audioSource = GetComponent<AudioSource>();
 
         horizontalInput = 0;
@@ -51,28 +47,28 @@ public class PlayerController : MonoBehaviour
     {
         horizontalInput = Input.GetAxis("Horizontal");
         verticalInput = Input.GetAxis("Vertical");
-        playerMovementInput = new Vector2(horizontalInput, verticalInput);
+        _movementInput = new Vector2(horizontalInput, verticalInput);
 
-        myRigidBody.AddForce(playerMovementInput * moveSpeed * Time.deltaTime);
+        _rigidBody.AddForce(_movementInput * moveSpeed * Time.deltaTime);
 
-        myAnim.SetFloat("Speed", Mathf.Abs(myRigidBody.velocity.x));
+        _animator.SetFloat("Speed", Mathf.Abs(_rigidBody.velocity.x));
     }
 
     private void HandleSpriteDirection()
     {
         if (horizontalInput > 0f)
         {
-            playerSpriteRenderer.flipX = false;
+            _spriteRenderer.flipX = false;
         }
         else if (horizontalInput < 0f)
         {
-            playerSpriteRenderer.flipX = true;
+            _spriteRenderer.flipX = true;
         }
     }
 
     public void Hurt()
     {
-        myAnim.Play("PlayerHurt");
+        _animator.Play("PlayerHurt");
         _audioSource.PlayOneShot(_hurtClip1);
         _audioSource.PlayOneShot(_hurtClip2);
     }

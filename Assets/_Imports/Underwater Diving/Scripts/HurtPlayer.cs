@@ -21,6 +21,5 @@ public class HurtPlayer : MonoBehaviour
         {
             _player.Hurt();
         }
-        GameManager.Instance.UpdateScore(-1);
     }
 }

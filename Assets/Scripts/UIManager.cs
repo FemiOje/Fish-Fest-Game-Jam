@@ -21,21 +21,6 @@ public class UIManager : MonoBehaviour
 
     public IEnumerator FadeInGameOverPanel()
     {
-        // // Get the initial alpha value of the game over panel
-        // CanvasGroup canvasGroup = gameOverPanel.GetComponent<CanvasGroup>();
-        // float alpha = canvasGroup.alpha;
-
-        // // Gradually increase the alpha value to fade in the panel
-        // float elapsedTime = 0f;
-        // while (elapsedTime < gameOverFadeDuration)
-        // {
-        //     elapsedTime += Time.deltaTime;
-        //     canvasGroup.alpha = Mathf.Lerp(alpha, 1f, elapsedTime / gameOverFadeDuration);
-        //     yield return null;
-        // }
-
-        // // Ensure the alpha value is set to 1 after fading
-        // canvasGroup.alpha = 1f;
         yield return new WaitForSeconds(gameOverFadeDuration);
         gameOverPanel.SetActive(true);
         Time.timeScale = 0f;
