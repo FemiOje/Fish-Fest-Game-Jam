@@ -4636,7 +4636,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3486471441812500083, guid: f077ef1d3ff5c4249a922d3969890557, type: 3}
       propertyPath: m_LocalPosition.z
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 3595161434601809479, guid: f077ef1d3ff5c4249a922d3969890557, type: 3}
+      propertyPath: m_Enabled
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3595161434601809479, guid: f077ef1d3ff5c4249a922d3969890557, type: 3}
+      propertyPath: parallaxSpeed
+      value: 1.1
       objectReference: {fileID: 0}
     - target: {fileID: 4004473399451573808, guid: f077ef1d3ff5c4249a922d3969890557, type: 3}
       propertyPath: m_Name

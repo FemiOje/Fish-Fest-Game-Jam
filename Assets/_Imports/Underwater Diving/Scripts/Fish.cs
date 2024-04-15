@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Fish : MonoBehaviour
 {
-    private PlayerController _player;
+    private Player _player;
     public GameObject death;
     public float speed = 0.3f;
 
@@ -24,7 +24,7 @@ public class Fish : MonoBehaviour
 
     void Start()
     {
-        _player = FindObjectOfType<PlayerController>();
+        _player = FindObjectOfType<Player>();
         _rigidbody = GetComponent<Rigidbody2D>();
 
         CalculatePoints(typeOfFish);

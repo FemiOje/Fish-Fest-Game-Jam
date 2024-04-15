@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class HurtPlayer : MonoBehaviour
 {
-    private PlayerController _player;
+    private Player _player;
 
     void Start()
     {
-        _player = FindObjectOfType<PlayerController>();
+        _player = FindObjectOfType<Player>();
         if (_player == null)
         {
-            Debug.Log("PlayerController script does not exist in the scene.");
+            Debug.Log("Player script does not exist in the scene.");
         }
     }
 
