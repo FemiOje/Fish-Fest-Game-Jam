@@ -308,6 +308,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Parallax Background
       objectReference: {fileID: 0}
+    - target: {fileID: 4000343652399390, guid: 321c07a5812564f41aa4a38670843220, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4251170480280206, guid: 321c07a5812564f41aa4a38670843220, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4595999964239660, guid: 321c07a5812564f41aa4a38670843220, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4965462594705250, guid: 321c07a5812564f41aa4a38670843220, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.049817562
