@@ -1,6 +1,5 @@
 using UnityEngine;
 using TMPro;
-using System.Collections;
 using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
@@ -11,13 +10,11 @@ public class GameManager : MonoBehaviour
     public int Lives { get; private set; }
     private int _defaultScore = 0;
     private int _defaultLives = 5;
-    
-    
+
     [Header("Text")]
     [SerializeField] TextMeshProUGUI livesText;
     [SerializeField] TextMeshProUGUI scoreText;
-    
-    
+
     [Header("Audio")]
     [SerializeField] AudioSource gameMusic;
     [SerializeField] AudioClip gameOverAudioClip;
@@ -48,10 +45,6 @@ public class GameManager : MonoBehaviour
         }
     }
 
-
-
-
-
     private void InitializeLevel()
     {
         Lives = _defaultLives;
@@ -59,7 +52,7 @@ public class GameManager : MonoBehaviour
         scoreText.text = Score.ToString();
         Time.timeScale = 1f;
     }
-  
+
     public void UpdateLives(int points)
     {
         Lives += points;
@@ -69,7 +62,7 @@ public class GameManager : MonoBehaviour
     public void UpdateScore(int points)
     {
         Score += points;
-
+        
         // Ensure Score doesn't become negative
         Score = Mathf.Max(Score, 0);
         scoreText.text = Score.ToString();
@@ -91,13 +84,16 @@ public class GameManager : MonoBehaviour
         {
             gameMusic.Stop();
         }
-        
+
         if (_audioSource != null)
         {
             _audioSource.PlayOneShot(gameOverAudioClip);
         }
 
-        StartCoroutine(UIManager.Instance.FadeInGameOverPanel());
+        if (UIManager.Instance != null)
+        {
+            StartCoroutine(UIManager.Instance.ShowGameOverPanel());
+        }
     }
 
     public void RestartLevel()
@@ -109,13 +105,9 @@ public class GameManager : MonoBehaviour
     {
         SceneManager.LoadScene(0);
     }
-    
+
     public void QuitGame()
     {
         Application.Quit();
-    }
-
-    private void OnDisable() {
-        UIManager.Instance.HideGameOverPanel();
     }
 }

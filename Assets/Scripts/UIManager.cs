@@ -1,7 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-using UnityEngine.SceneManagement;
 using System.Collections;
 
 public class UIManager : MonoBehaviour
@@ -15,11 +14,25 @@ public class UIManager : MonoBehaviour
     public static UIManager Instance;
     private float gameOverFadeDuration = 0.5f;
 
-    private void Start() {
+
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
+
+    private void Start()
+    {
         Time.timeScale = 1f;       
     }
 
-    public IEnumerator FadeInGameOverPanel()
+    public IEnumerator ShowGameOverPanel()
     {
         yield return new WaitForSeconds(gameOverFadeDuration);
         gameOverPanel.SetActive(true);
@@ -29,19 +42,5 @@ public class UIManager : MonoBehaviour
     public void HideGameOverPanel()
     {
         gameOverPanel.SetActive(false);
-    }
-
-  
-    private void Awake()
-    {
-        if (Instance == null)
-        {
-            Instance = this;
-            DontDestroyOnLoad(gameObject);
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
     }
 }
