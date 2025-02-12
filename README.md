@@ -1,0 +1,23 @@
+<b>Fish Fest Game Jam </b>
+<p>This is my submission for the Fish Fest game jam by PossiblyAxolotl.</p>
+<p>All assets used are listed in Assets/_Imports/Imports.txt </p>
+
+<code> 
+1. "Underwater Diving" by Ansimuz
+Asset Store: https://assetstore.unity.com/packages/2d/environments/underwater-diving-94029#content
+
+2. "Octopus, Jellyfish, Shark and Turtle Pixel Art" from itch.io
+Link: https://free-game-assets.itch.io/octopus-jellyfish-shark-and-turtle-free-sprite-pixel-art
+
+3. Sound:
+mab-water-pzm-sass.wav from https://freesound.org/people/mab/sounds/23295/
+
+4. UI Click Sound Pack: https://assetstore.unity.com/packages/audio/sound-fx/free-ui-click-sound-pack-244644
+https://www.kenney.nl/
+
+5. RPG Essentials Sound Effects: https://assetstore.unity.com/packages/audio/sound-fx/rpg-essentials-sound-effects-free-227708
+
+6. Water Game Theme Loop 2.wav from https://freesound.org/people/Mrthenoronha/sounds/514800/
+
+7. Intro Music: Electro Ambient Music: Suspension – Pulsating and Futuristic by https://freesound.org/people/kjartan_abel/sounds/531854/
+</code>
