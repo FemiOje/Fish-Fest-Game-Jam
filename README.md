@@ -2,7 +2,7 @@
 <p>This is my submission for the Fish Fest game jam by PossiblyAxolotl.</p>
 <p>All assets used are listed in Assets/_Imports/Imports.txt </p>
 
-<code> 
+ 
 1. "Underwater Diving" by Ansimuz
 Asset Store: https://assetstore.unity.com/packages/2d/environments/underwater-diving-94029#content
 
@@ -20,4 +20,3 @@ https://www.kenney.nl/
 6. Water Game Theme Loop 2.wav from https://freesound.org/people/Mrthenoronha/sounds/514800/
 
 7. Intro Music: Electro Ambient Music: Suspension – Pulsating and Futuristic by https://freesound.org/people/kjartan_abel/sounds/531854/
-</code>
